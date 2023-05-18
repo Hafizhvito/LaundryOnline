@@ -1,4 +1,3 @@
--- File: laundry_db.sql
 
 -- Membuat database "laundry_db"
 CREATE DATABASE IF NOT EXISTS laundry_db;
@@ -12,5 +11,6 @@ CREATE TABLE IF NOT EXISTS users (
   username VARCHAR(50) NOT NULL,
   password VARCHAR(50) NOT NULL,
   address VARCHAR(100) NOT NULL,
-  telepon VARCHAR(15) NOT NULL
+  telepon VARCHAR(50) NOT NULL,
+  userType ENUM('User', 'Admin') NOT NULL
 );
