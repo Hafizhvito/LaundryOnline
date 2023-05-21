@@ -1,5 +1,4 @@
 package Connection;
-
 import java.sql.*;
 
 public class connectionLaundry {
@@ -10,8 +9,9 @@ public class connectionLaundry {
         String url = "jdbc:mysql://localhost:3306/laundry_db";
 
         try {
+            // Menambahkan driver ke classpath
             connection = DriverManager.getConnection(url, "root", "");
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -38,29 +38,29 @@ public class connectionLaundry {
         return exists;
     }
 
-public boolean checkLogin(String username, String password, String userType) {
-    boolean loggedIn = false;
+    public boolean checkLogin(String username, String password, String userType) {
+        boolean loggedIn = false;
 
-    try {
-        String sql = "SELECT * FROM users WHERE username = ? AND password = ? AND userType = ?";
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, username);
-        statement.setString(2, password);
-        statement.setString(3, userType);
-        ResultSet resultSet = statement.executeQuery();
+        try {
+            String sql = "SELECT * FROM users WHERE BINARY username = ? AND BINARY password = ? AND userType = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, username);
+            statement.setString(2, password);
+            statement.setString(3, userType);
+            ResultSet resultSet = statement.executeQuery();
 
-        if (resultSet.next()) {
-            loggedIn = true;
+            if (resultSet.next()) {
+                loggedIn = true;
+            }
+
+            resultSet.close();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
-        resultSet.close();
-        statement.close();
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return loggedIn;
     }
-
-    return loggedIn;
-}
 
     public boolean saveRegistration(String username, String password, String address, String telepon, String userType) {
         boolean success = false;

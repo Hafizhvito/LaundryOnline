@@ -77,13 +77,13 @@ public class registrationForm extends JFrame {
                     JOptionPane.showMessageDialog(panel, "Password must be at least 8 characters long!", "Error", JOptionPane.ERROR_MESSAGE);
                 } else if (!hasUppercase) {
                     JOptionPane.showMessageDialog(panel, "Username must include at least one uppercase letter!", "Error", JOptionPane.ERROR_MESSAGE);
-                    } else {
-                        // Memeriksa keberadaan username di database
-                        boolean exists = connectionLaundry.checkRegistration(username);
+                } else {
+                    // Memeriksa keberadaan username di database
+                    boolean exists = connectionLaundry.checkRegistration(username);
 
-                        if (exists) {
-                            JOptionPane.showMessageDialog(panel, "Username already exists!", "Error", JOptionPane.ERROR_MESSAGE);
-                        } else {
+                    if (exists) {
+                        JOptionPane.showMessageDialog(panel, "Username already exists!", "Error", JOptionPane.ERROR_MESSAGE);
+                    } else {
                         // Simpan data ke database
                         boolean success = connectionLaundry.saveRegistration(username, password, address, telepon, userType);
 
