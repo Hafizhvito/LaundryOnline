@@ -13,6 +13,6 @@ Cara menggunakan kode ini:
 9. Kemudian Apply dan OK.
  
 Kelompok Unknown
-1. Hafizh Vito Pratomo, A, 1402022022
-2. Bernando Idayah, A, 1402022012
-3. Hilal Rizki Akbar, B, 1402022023
+1. Hafizh Vito Pratomo, B, 1402022022
+2. Bernando Idayah, B, 1402022012
+3. Hilal Rizki Akbar, A, 1402022023
