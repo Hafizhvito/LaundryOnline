@@ -32,7 +32,7 @@ public class loginForm extends JFrame {
         setTitle("Login");
         setContentPane(panels);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setMinimumSize(new Dimension(600, 550));
+        setMinimumSize(new Dimension(1000, 600));
         setResizable(false);
         setLocationRelativeTo(null);
 

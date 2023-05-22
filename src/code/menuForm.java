@@ -20,19 +20,24 @@ public class menuForm extends JFrame {
     private JPanel cardFourPanel;
     private JLabel orderLabel;
     private JLabel informationLabel;
-    private JTable tableData;
-    private JButton refreshButton;
-    private JButton createButton;
-    private JButton updateButton;
-    private JButton deleteButton;
-    private JTextField textField1;
+    private JTable tableModel;
+    private JPanel botPanelDasboard;
+    private JTextField textField2;
+    private JTextField textField3;
+    private JTextField textField4;
+    private JButton button2;
+    private JButton button3;
+    private JButton button4;
+    private JTextField textField5;
+    private JTable tabelProfile;
+    private JPanel botPanelProfile;
     private CardLayout cardLayout;
 
     public menuForm() {
         setTitle("Home");
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setMinimumSize(new Dimension(1100, 800));
+        setMinimumSize(new Dimension(1200, 800));
         setResizable(false);
         setLocationRelativeTo(null);
 

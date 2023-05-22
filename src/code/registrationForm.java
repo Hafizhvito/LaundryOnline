@@ -31,7 +31,7 @@ public class registrationForm extends JFrame {
 
         setTitle("Registration");
         setContentPane(panel);
-        setMinimumSize(new Dimension(600, 550));
+        setMinimumSize(new Dimension(1000, 650));
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
