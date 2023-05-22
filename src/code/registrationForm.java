@@ -16,12 +16,12 @@ public class registrationForm extends JFrame {
     private JButton haveAccountButton;
     private JTextField addressField;
     private JLabel addressLabel;
-    private JLabel registrationLogo;
     private JTextField teleponField;
     private JLabel teleponLabel;
     private JLabel passwordLabel;
     private JComboBox chooseBox;
     private JLabel chooseLabel;
+    private JLabel authImage;
 
     // Membuat objek koneksi ke database
     private connectionLaundry connectionLaundry;
@@ -35,6 +35,12 @@ public class registrationForm extends JFrame {
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+
+        ImageIcon authIcon = new ImageIcon("src/image/laundry.png");
+        authImage.setIcon(authIcon);
+        Image image = authIcon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+        ImageIcon scaledAuthIcon = new ImageIcon(image);
+        authImage.setIcon(scaledAuthIcon);
 
         // Menambahkan icon pada frame
         ImageIcon icon = new ImageIcon("src/image/laundry.png");

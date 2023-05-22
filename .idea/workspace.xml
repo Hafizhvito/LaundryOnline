@@ -5,18 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26d0c2c0-7824-4944-b4da-6dcca1db1139" name="Changes" comment="I have added several components as enhancements, built the database, and updated the code to improve its performance and eliminate any errors. Additionally, I have made improvements to the GUI's appearance.">
-      <change afterPath="$PROJECT_DIR$/README.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/RegistrationForm.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/loginForm.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/menuForm.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Sql/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/Sql/data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/code/RegistrationForm.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/code/loginForm.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/RegistrationForm.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/RegistrationForm.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/loginForm.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/loginForm.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/code/loginForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/loginForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/code/menuForm.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/code/menuForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/menuForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/code/registrationForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/registrationForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/image/laundry.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/image/laundry.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,8 +27,8 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="jar://$PROJECT_DIR$/../../../../Program Files/Java/jdk-20/lib/src.zip!/java.desktop/javax/swing/JDialog.java" root0="SKIP_INSPECTION" />
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2PnKQ1f9RP9DfDCpe2NpvIGiFWG" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -125,6 +119,17 @@
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

@@ -19,8 +19,8 @@ public class loginForm extends JFrame {
     private JButton backButton;
     private JComboBox<String> chooseLabel;
     private JLabel chooserLabel;
-    private JLabel logos;
     private JTextField usernameField;
+    private JLabel authImage;
     /**
      * The login form class for user authentication.
      */
@@ -35,6 +35,12 @@ public class loginForm extends JFrame {
         setMinimumSize(new Dimension(1000, 600));
         setResizable(false);
         setLocationRelativeTo(null);
+
+        ImageIcon authIcon = new ImageIcon("src/image/laundry.png");
+        authImage.setIcon(authIcon);
+        Image image = authIcon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+        ImageIcon scaledAuthIcon = new ImageIcon(image);
+        authImage.setIcon(scaledAuthIcon);
 
         ImageIcon icon = new ImageIcon("src/image/laundry.png");
         setIconImage(icon.getImage());
