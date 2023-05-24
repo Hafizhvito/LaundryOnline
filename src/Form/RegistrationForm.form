@@ -3,11 +3,13 @@
   <grid id="27dc6" binding="panel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="747" height="546"/>
+      <xy x="20" y="20" width="919" height="560"/>
     </constraints>
     <properties>
       <background color="-9579521"/>
       <foreground color="-3383911"/>
+      <minimumSize width="-1" height="-1"/>
+      <preferredSize width="1000" height="650"/>
     </properties>
     <border type="none"/>
     <children>
@@ -135,7 +137,7 @@
           </component>
           <component id="94b31" class="javax.swing.JButton" binding="registerButton">
             <constraints>
-              <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <background color="-2319405"/>
@@ -150,7 +152,7 @@
           </component>
           <component id="10db6" class="javax.swing.JButton" binding="haveAccountButton">
             <constraints>
-              <grid row="8" column="0" row-span="2" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="8" column="1" row-span="2" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <autoscrolls value="false"/>
@@ -173,7 +175,7 @@
           </component>
           <component id="87d17" class="javax.swing.JButton" binding="exitButton" default-binding="true">
             <constraints>
-              <grid row="7" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <background color="-2319405"/>
@@ -184,9 +186,13 @@
           </component>
         </children>
       </grid>
-      <grid id="97288" layout-manager="BorderLayout" hgap="0" vgap="0">
+      <grid id="97288" binding="sidePanelReg" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="300" height="650"/>
+            <maximum-size width="10000" height="1000"/>
+          </grid>
         </constraints>
         <properties>
           <background color="-9579521"/>
@@ -195,21 +201,23 @@
           <size top="15" left="0" bottom="0" right="0"/>
         </border>
         <children>
-          <component id="411d8" class="javax.swing.JLabel">
-            <constraints border-constraint="North"/>
+          <component id="d3cb8" class="javax.swing.JLabel" binding="sideImageReg">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
             <properties>
-              <font name="MV Boli" size="36" style="1"/>
-              <foreground color="-1"/>
-              <horizontalAlignment value="0"/>
-              <text value="LaundryKu"/>
+              <icon value="image/laundry.png"/>
+              <text value=""/>
             </properties>
           </component>
-          <component id="de021" class="javax.swing.JLabel" binding="authImage">
-            <constraints border-constraint="Center"/>
+          <component id="fb260" class="javax.swing.JLabel" binding="sideTextReg">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
             <properties>
-              <horizontalAlignment value="0"/>
-              <horizontalTextPosition value="0"/>
-              <text value=""/>
+              <font name="Century" size="36"/>
+              <foreground color="-3383911"/>
+              <text value="LaundryKu"/>
             </properties>
           </component>
         </children>

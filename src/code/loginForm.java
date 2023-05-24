@@ -7,6 +7,10 @@ import java.awt.event.ActionListener;
 
 import Connection.connectionLaundry;
 
+
+/**
+ *
+ */
 public class loginForm extends JFrame {
     private JPanel panels;
     private JLabel loginBanner;
@@ -20,6 +24,9 @@ public class loginForm extends JFrame {
     private JComboBox<String> chooseLabel;
     private JLabel chooserLabel;
     private JTextField usernameField;
+    private JPanel sidePanelLogin;
+    private JLabel sideImagineLog;
+    private JLabel sideTextLogin;
     private JLabel authImage;
     /**
      * The login form class for user authentication.
@@ -32,15 +39,9 @@ public class loginForm extends JFrame {
         setTitle("Login");
         setContentPane(panels);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setMinimumSize(new Dimension(1000, 600));
+        setMinimumSize(new Dimension(1000, 650));
         setResizable(false);
         setLocationRelativeTo(null);
-
-        ImageIcon authIcon = new ImageIcon("src/image/laundry.png");
-        authImage.setIcon(authIcon);
-        Image image = authIcon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
-        ImageIcon scaledAuthIcon = new ImageIcon(image);
-        authImage.setIcon(scaledAuthIcon);
 
         ImageIcon icon = new ImageIcon("src/image/laundry.png");
         setIconImage(icon.getImage());

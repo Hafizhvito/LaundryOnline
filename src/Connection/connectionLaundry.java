@@ -86,5 +86,7 @@ public class connectionLaundry {
 
         return success;
     }
-
+    public Connection getConnection() {
+        return connection;
+    }
 }
