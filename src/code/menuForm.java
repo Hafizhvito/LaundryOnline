@@ -25,7 +25,6 @@ public class menuForm extends JFrame {
     private JPanel cardTwoPanel;
     private JPanel cardThreePanel;
     private JPanel cardFourPanel;
-    private JLabel informationLabel;
     private JPanel botPanelDasboard;
     private JPanel botPanelProfile;
     private JTextField nameFieldProfile;
