@@ -5,15 +5,15 @@ import java.text.DecimalFormat;
 public class LaundryType {
     private int id;
     private String laundryType;
-    private double price;
+    private String price;
 
-    public LaundryType(int id, String laundryType, double price) {
+    public LaundryType(int id, String laundryType, String price) {
         this.id = id;
         this.laundryType = laundryType;
         this.price = price;
     }
 
-    public LaundryType(String laundryType, double price) {
+    public LaundryType(String laundryType, String price) {
         this.laundryType = laundryType;
         this.price = price;
     }
@@ -26,7 +26,7 @@ public class LaundryType {
         return laundryType;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
@@ -38,7 +38,7 @@ public class LaundryType {
         this.laundryType = laundryType;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -48,7 +48,7 @@ public class LaundryType {
         return "LaundryType{" +
                 "id=" + id +
                 ", laundryType='" + laundryType + '\'' +
-                ", price=" + decimalFormat.format(price) +
+                ", price=" + price +
                 '}';
     }
 }

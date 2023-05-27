@@ -1,3 +1,8 @@
+File ini menjelaskan kelengkapan berkas proyek akhir kami yang berjudul aplikasi LaundryKu.
+1. Semua Code terdapat pada src dan database terdapat pada folder sql
+2. Source code project IntelIJ
+3. Link Repository Github: https://github.com/Hafizhvito/LaundryOnline
+
 Tugas Proyek Akhir Mata Kuliah Pemrograman Berorientasi Objek (PBO) yang berjudul
 Aplikasi laundry.
 
@@ -9,7 +14,7 @@ Cara menggunakan kode ini:
 5. Click kanan pada Project Laundry.
 6. Kemudian pilih opsi "Open Module Setting".
 7. Setelah itu pilih menu "Modules" dan pilih opsi "Dependensies".
-8. Pilih lib dan centang pada lib.
+8. Pilih lib serta buka dan click mysqlconnector dan centang.
 9. Kemudian Apply dan OK.
  
 Kelompok Unknown

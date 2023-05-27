@@ -4,8 +4,8 @@
     import java.awt.*;
     import java.awt.event.ActionEvent;
     import java.awt.event.ActionListener;
-    import Connection.connectionLaundry;
-    public class registrationForm extends JFrame {
+    import Connection.ConnectionLaundry;
+    public class RegistrationForm extends JFrame {
         private JPanel panel;
         private JLabel registrationLabel;
         private JLabel usernameLabel;
@@ -27,10 +27,10 @@
         private JLabel authImage;
 
         // Membuat objek koneksi ke database
-        private connectionLaundry connectionLaundry;
+        private ConnectionLaundry connectionLaundry;
 
-        public registrationForm() {
-            connectionLaundry = new connectionLaundry();
+        public RegistrationForm() {
+            connectionLaundry = new ConnectionLaundry();
 
             setTitle("Registration");
             setContentPane(panel);
@@ -94,7 +94,7 @@
                             if (success) {
                                 // Menampilkan form login dan menyembunyikan form registrasi
                                 JOptionPane.showMessageDialog(panel, "Congratulations, you have successfully registered your account!");
-                                loginForm loginForm = new loginForm();
+                                LoginForm loginForm = new LoginForm();
                                 loginForm.setVisible(true);
                                 setVisible(false);
                             } else {
@@ -120,7 +120,7 @@
             haveAccountButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    loginForm loginForm = new loginForm();
+                    LoginForm loginForm = new LoginForm();
                     loginForm.setVisible(true);
                     setVisible(false);
                 }

@@ -9,10 +9,15 @@ import java.sql.Connection;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.table.TableColumn;
+import Connection.ConnectionLaundry;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
-import Connection.connectionLaundry;
-
-public class menuForm extends JFrame {
+/**
+ * Represents a menu form in a laundry management system.
+ * This form displays the menu options and handles user input.
+ */
+public class MenuForm extends JFrame {
     private JPanel mainPanel;
     private JPanel topPanel;
     private JPanel buttonPanel;
@@ -45,20 +50,18 @@ public class menuForm extends JFrame {
     private JLabel registAsPro;
     private JPanel botPanelOrder;
     private JLabel textOrder;
-    private JTextField noOrderField;
-    private JTextField costumerField;
-    private JComboBox boxLaundryType;
+    private JTextField idOrderField;
+    private JTextField customerField;
     private JTextField totalField;
-    private JTextField payField;
-    private JTextField rmField;
+    private JTextField paymentField;
+    private JTextField remainingBalanceField;
     private JTextField statusField;
     private JButton addOrderButton;
     private JButton saveOrderButtton;
-    private JLabel noOrder;
-    private JLabel costumerOrder;
+    private JLabel idOrder;
+    private JLabel customerOrder;
     private JLabel laundryTypeOrder;
     private JLabel weightOrder;
-    private JComboBox boxWeight;
     private JLabel totalOrder;
     private JLabel paydepoOrder;
     private JLabel remainingBalance;
@@ -87,14 +90,20 @@ public class menuForm extends JFrame {
     private JLabel idLaundryType;
     private JLabel laundryTypeLabel;
     private JLabel laundryPrice;
+    private JButton deleteOrderButton;
+    private JButton refreshOrderButton;
+    private JButton changeOrderButton;
     private CardLayout cardLayout;
-    private JComboBox<String> accessComboBox;
     private ProfileManager profileManager;
     private LaundryTypeManager laundryTypeManager;
+    private OrderManager orderManager;
     private Connection connection;
+    private JTextField weightOrderField;
+    private JComboBox<String> boxLaundryType;
+    private JButton button1;
+    private JTextPane laundrykuAdalahSebuahAplikasiTextPane;
 
-
-    public menuForm() {
+    public MenuForm() {
         setTitle("Home");
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -105,15 +114,26 @@ public class menuForm extends JFrame {
         cardLayout = new CardLayout();
         parentPanel.setLayout(cardLayout);
 
-        connectionLaundry connection = new connectionLaundry();
+        ConnectionLaundry connection = new ConnectionLaundry();
         this.profileManager = new ProfileManager(connection.getConnection());
 
         LaundryTypeManager laundryTypeManager = new LaundryTypeManager(connection.getConnection());
         this.laundryTypeManager = laundryTypeManager;
 
+        OrderManager orderManager = new OrderManager(connection.getConnection());
+        this.orderManager = orderManager;
+
+        orderManager.refreshLaundryTypeComboBox(boxLaundryType);
+
+
+        accessBoxPro.addItem("User");
+        accessBoxPro.addItem("Admin");
+
         initializeProfileTable();
 
         initializeLaundryTypeTable();
+
+        initializeOrderTable();
 
         profileButton.addActionListener(new ActionListener() {
             @Override
@@ -220,9 +240,287 @@ public class menuForm extends JFrame {
             }
         });
 
+        addOrderButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addOrderButton();
+            }
+        });
+
+        deleteOrderButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deleteOrderButton();
+            }
+        });
+
+        refreshOrderButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                refreshOrderTable();
+            }
+        });
+
+        changeOrderButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changeOrderButton();
+            }
+        });
+
+        saveOrderButtton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveOrderButton();
+            }
+        });
+
         setVisible(true);
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LoginForm loginForm = new LoginForm();
+                loginForm.setVisible(true);
+                setVisible(false);
+            }
+        });
     }
 
+    // untuk halaman order
+    private void addOrderButton() {
+        String customer = customerField.getText();
+        String weight = weightOrderField.getText();
+        String payment = paymentField.getText();
+
+        if (customer.isEmpty() || weight.isEmpty() || payment.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill all fields.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            String selectedLaundryTypeName = (String) boxLaundryType.getSelectedItem();
+            String[] parts = selectedLaundryTypeName.split(" - ");
+            String laundryType = parts[0];
+            double price = Double.parseDouble(parts[1]);
+            double weightValue = Double.parseDouble(weight);
+            double paymentValue = Double.parseDouble(payment);
+            int total = (int) (weightValue * price);
+            int remainingBalance = (int) (paymentValue - total);
+
+            String status = (remainingBalance < 0) ? "Unpaid" : "Settled";
+
+            // Menambahkan order ke database menggunakan OrderManager
+            Order order = new Order(customer, laundryType, weight, String.valueOf(total), payment,
+                    String.valueOf(remainingBalance), status);
+            orderManager.addOrder(order);
+
+            // Mendapatkan ID yang baru dibuat
+            int newOrderId = order.getId();
+
+            DefaultTableModel orderTableModel = (DefaultTableModel) orderTable.getModel();
+            Object[] rowData = {
+                    newOrderId,
+                    customer,
+                    selectedLaundryTypeName,
+                    weight,
+                    String.valueOf(total),
+                    payment,
+                    String.valueOf(remainingBalance),
+                    status
+            };
+            orderTableModel.addRow(rowData);
+
+            JOptionPane.showMessageDialog(this, "Order added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid input.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void deleteOrderButton() {
+        int selectedRow = orderTable.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select data from the table.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this order?", "Confirmation", JOptionPane.YES_NO_OPTION);
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        DefaultTableModel orderTableModel = (DefaultTableModel) orderTable.getModel();
+        String id = orderTableModel.getValueAt(selectedRow, 0).toString();
+        orderTableModel.removeRow(selectedRow);
+        orderManager.deleteOrder(id);
+    }
+
+    private void changeOrderButton() {
+        int selectedRow = orderTable.getSelectedRow();
+        if (selectedRow >= 0) {
+            DefaultTableModel orderTableModel = (DefaultTableModel) orderTable.getModel();
+            String id = orderTableModel.getValueAt(selectedRow, 0).toString();
+            String customer = orderTableModel.getValueAt(selectedRow, 1).toString();
+            String laundryType = orderTableModel.getValueAt(selectedRow, 2).toString();
+            String weight = orderTableModel.getValueAt(selectedRow, 3).toString();
+            String total = orderTableModel.getValueAt(selectedRow, 4).toString();
+            String payment = orderTableModel.getValueAt(selectedRow, 5).toString();
+            double remainingBalance = Double.parseDouble(orderTableModel.getValueAt(selectedRow, 6).toString());
+            String status = orderTableModel.getValueAt(selectedRow, 7).toString();
+
+            idOrderField.setText(id);
+            customerField.setText(customer);
+            boxLaundryType.setSelectedItem(laundryType);
+            weightOrderField.setText(weight);
+            totalField.setText(total);
+            paymentField.setText(payment);
+            remainingBalanceField.setText(String.valueOf(remainingBalance));
+            statusField.setText(status);
+
+            // Jika remainingBalance < 0 dan status unpaid, dan payment sesuai dengan total
+            if (remainingBalance < 0 && status.equals("Unpaid") && Double.parseDouble(payment) == Double.parseDouble(total)) {
+                remainingBalanceField.setText("0");
+                statusField.setText("Settled");
+            } else {
+                double updatedRemainingBalance = Double.parseDouble(payment) - Double.parseDouble(total);
+                remainingBalanceField.setText(String.valueOf(updatedRemainingBalance));
+                statusField.setText(updatedRemainingBalance < 0 ? "Unpaid" : "Settled");
+            }
+        }
+    }
+
+    private void saveOrderButton() {
+        String idText = idOrderField.getText();
+        String customer = customerField.getText();
+        String laundryType = boxLaundryType.getSelectedItem().toString();
+        String weight = weightOrderField.getText();
+        String payment = paymentField.getText();
+        String total = totalField.getText();
+        double remainingBalance = Double.parseDouble(remainingBalanceField.getText());
+        String status = remainingBalance < 0 ? "Unpaid" : "Settled";
+
+        if (customer.isEmpty() || laundryType.isEmpty() || weight.isEmpty() || payment.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill all fields.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            Order order;
+            if (!idText.isEmpty()) {
+                int id = Integer.parseInt(idText);
+                order = orderManager.getOrderById(id);
+                if (order == null) {
+                    JOptionPane.showMessageDialog(this, "Order not found.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            } else {
+                order = new Order(customer, laundryType, weight, total, payment, String.valueOf(remainingBalance), status);
+            }
+
+            order.setCustomer(customer);
+            order.setLaundryType(laundryType);
+            order.setWeight(weight);
+            order.setTotal(total);
+            order.setPayment(payment);
+            order.setRemainingBalance(String.valueOf(remainingBalance));
+            order.setStatus(status);
+
+            if (order.getId() == 0) {
+                orderManager.addOrder(order);
+            } else {
+                orderManager.updateOrder(order);
+            }
+
+            JOptionPane.showMessageDialog(this, "Order saved successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+            refreshOrderTable();
+
+            idOrderField.setText("");
+            customerField.setText("");
+            boxLaundryType.setSelectedIndex(0);
+            weightOrderField.setText("");
+            paymentField.setText("");
+            totalField.setText("");
+            remainingBalanceField.setText("");
+            statusField.setText("");
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid input.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void initializeOrderTable() {
+        DefaultTableModel orderTableModel = new DefaultTableModel();
+        orderTableModel.addColumn("ID");
+        orderTableModel.addColumn("Customer");
+        orderTableModel.addColumn("Laundry Type");
+        orderTableModel.addColumn("Weight");
+        orderTableModel.addColumn("Total");
+        orderTableModel.addColumn("Payment");
+        orderTableModel.addColumn("Outstanding Payment");
+        orderTableModel.addColumn("Status");
+
+        orderTable.setModel(orderTableModel);
+
+        refreshOrderTable();
+    }
+
+    private void refreshOrderTable() {
+        DefaultTableModel orderTableModel = (DefaultTableModel) orderTable.getModel();
+        orderTableModel.setRowCount(0);
+
+        List<Order> orders = orderManager.getAllOrders();
+        for (Order order : orders) {
+            String status = (Double.parseDouble(order.getRemainingBalance()) < 0) ? "Unpaid" : "Settled";
+            order.setStatus(status);
+
+            Object[] rowData = {
+                    order.getId(),
+                    order.getCustomer(),
+                    order.getLaundryType(),
+                    order.getWeight(),
+                    order.getTotal(),
+                    order.getPayment(),
+                    order.getRemainingBalance(),
+                    order.getStatus()
+            };
+            orderTableModel.addRow(rowData);
+        }
+    }
+
+    private void calculateTotalAndRemainingBalance() {
+        String weight = weightOrderField.getText();
+        String payment = paymentField.getText();
+
+        if (!weight.isEmpty() && !payment.isEmpty()) {
+            try {
+                double weightValue = Double.parseDouble(weight);
+                double paymentValue = Double.parseDouble(payment);
+
+                double total = weightValue * calculateLaundryTypePrice();
+                double remainingBalance = paymentValue - total;
+
+                totalField.setText(String.valueOf(total));
+                remainingBalanceField.setText(String.valueOf(remainingBalance));
+
+                String status = (remainingBalance < 0) ? "Unpaid" : "Settled";
+                statusField.setText(status);
+            } catch (NumberFormatException e) {
+                totalField.setText("");
+                remainingBalanceField.setText("");
+                statusField.setText("");
+            }
+        } else {
+            totalField.setText("");
+            remainingBalanceField.setText("");
+            statusField.setText("");
+        }
+    }
+
+    private double calculateLaundryTypePrice() {
+        return 0;
+    }
+
+    // Untuk halaman LaundryType
     private void addLaundryType() {
         String laundryType = laundryTypeField.getText();
         String priceString = laundryPriceField.getText();
@@ -232,15 +530,25 @@ public class menuForm extends JFrame {
             return;
         }
 
-        double price = Double.parseDouble(priceString);
-        LaundryType newLaundryType = new LaundryType(laundryType, price);
+        double price;
+        try {
+            price = Double.parseDouble(priceString);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid price. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String formattedPrice = String.valueOf(price); // Mengkonversi harga menjadi string tanpa perubahan format
+        LaundryType newLaundryType = new LaundryType(laundryType, formattedPrice);
         laundryTypeManager.addLaundryType(newLaundryType);
 
         DefaultTableModel laundryTypeTableModel = (DefaultTableModel) laundryTypeTable.getModel();
-        laundryTypeTableModel.addRow(new Object[]{newLaundryType.getId(), laundryType, price});
+        laundryTypeTableModel.addRow(new Object[]{newLaundryType.getId(), laundryType, formattedPrice});
 
         laundryTypeField.setText("");
         laundryPriceField.setText("");
+
+        JOptionPane.showMessageDialog(this, "Laundry type added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
     }
 
 
@@ -248,6 +556,11 @@ public class menuForm extends JFrame {
         int selectedRow = laundryTypeTable.getSelectedRow();
         if (selectedRow < 0) {
             JOptionPane.showMessageDialog(this, "Please select data from the table.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this laundry type?", "Confirmation", JOptionPane.YES_NO_OPTION);
+        if (confirm != JOptionPane.YES_OPTION) {
             return;
         }
 
@@ -279,20 +592,21 @@ public class menuForm extends JFrame {
             int laundryTypeId = Integer.parseInt(laundryTypeTableModel.getValueAt(i, 0).toString());
             String laundryType = laundryTypeTableModel.getValueAt(i, 1).toString();
             String priceString = laundryTypeTableModel.getValueAt(i, 2).toString();
-            double price = Double.parseDouble(priceString);
 
             LaundryType existingLaundryType = laundryTypeManager.getLaundryTypeById(laundryTypeId);
             if (existingLaundryType != null) {
                 existingLaundryType.setLaundryType(laundryType);
-                existingLaundryType.setPrice(price);
+                existingLaundryType.setPrice(priceString); // Menggunakan kembali format harga yang ada pada tabel
                 laundryTypeManager.updateLaundryType(existingLaundryType);
             } else {
-                LaundryType newLaundryType = new LaundryType(laundryType, price);
+                LaundryType newLaundryType = new LaundryType(laundryType, priceString);
                 laundryTypeManager.addLaundryType(newLaundryType);
             }
         }
+        // Clear the fields
+        laundryTypeField.setText("");
+        laundryPriceField.setText("");
     }
-
 
     private void initializeLaundryTypeTable() {
         DefaultTableModel laundryTypeTableModel = new DefaultTableModel();
@@ -307,27 +621,43 @@ public class menuForm extends JFrame {
 
     private void refreshLaundryTypeTable() {
         DefaultTableModel laundryTypeTableModel = (DefaultTableModel) laundryTypeTable.getModel();
+
+        // Hapus semua baris yang ada pada tabel
         laundryTypeTableModel.setRowCount(0);
 
-        List<LaundryType> laundryTypes = laundryTypeManager.getAllLaundryTypes();
+        // Format angka tanpa titik
+        DecimalFormat decimalFormat = new DecimalFormat("#0");
+        DecimalFormatSymbols symbols = decimalFormat.getDecimalFormatSymbols();
+        symbols.setGroupingSeparator('\0'); // Menghapus simbol grup
+        decimalFormat.setDecimalFormatSymbols(symbols);
 
+        // Tambahkan data dari database ke dalam tabel
+        List<LaundryType> laundryTypes = laundryTypeManager.getAllLaundryTypes();
         for (LaundryType laundryType : laundryTypes) {
-            laundryTypeTableModel.addRow(new Object[]{laundryType.getId(), laundryType.getLaundryType(), laundryType.getPrice()});
+            String formattedPrice = decimalFormat.format(Double.parseDouble(laundryType.getPrice()));
+            Object[] rowData = new Object[]{
+                    laundryType.getId(),
+                    laundryType.getLaundryType(),
+                    formattedPrice
+            };
+            laundryTypeTableModel.addRow(rowData);
         }
     }
 
+    // Untuk halaman Profile
     private void addProfile() {
         String name = nameFieldProfile.getText();
         String address = addressFieldProfile.getText();
         String phoneNumber = phoneNumberField.getText();
         String password = passwordFieldProfile.getText();
-        String access = accessComboBox.getSelectedItem().toString();
+        String access = accessBoxPro.getSelectedItem().toString();
 
         // Validasi field kosong
         if (name.isEmpty() || address.isEmpty() || phoneNumber.isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill all the fields.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+
         // Validasi username dengan huruf kapital
         if (!name.matches(".*[A-Z].*")) {
             JOptionPane.showMessageDialog(this, "Username must contain at least one capital letter.");
@@ -357,8 +687,11 @@ public class menuForm extends JFrame {
         addressFieldProfile.setText("");
         phoneNumberField.setText("");
         passwordFieldProfile.setText("");
-        accessComboBox.setSelectedIndex(0);
+        accessBoxPro.setSelectedIndex(0);
+
+        JOptionPane.showMessageDialog(this, "Profile added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
     }
+
 
     private void deleteProfile() {
         int selectedRow = profileTable.getSelectedRow();
@@ -366,18 +699,22 @@ public class menuForm extends JFrame {
             JOptionPane.showMessageDialog(this, "Please select data from the table.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this profile?", "Confirmation", JOptionPane.YES_NO_OPTION);
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        }
         DefaultTableModel profileTableModel = (DefaultTableModel) profileTable.getModel();
         int profileId = Integer.parseInt(profileTableModel.getValueAt(selectedRow, 0).toString());
         profileTableModel.removeRow(selectedRow);
         profileManager.deleteProfile(profileId);
     }
 
+
     private void changeProfile() {
         int selectedRow = profileTable.getSelectedRow();
         if (selectedRow >= 0) {
             DefaultTableModel profileTableModel = (DefaultTableModel) profileTable.getModel();
-            int profileId = (int) profileTableModel.getValueAt(selectedRow, 0);
+            int profileId = Integer.parseInt(profileTableModel.getValueAt(selectedRow, 0).toString());
             String name = profileTableModel.getValueAt(selectedRow, 1).toString();
             String address = profileTableModel.getValueAt(selectedRow, 2).toString();
             String phoneNumber = profileTableModel.getValueAt(selectedRow, 3).toString();
@@ -391,7 +728,7 @@ public class menuForm extends JFrame {
                     // Validate phoneNumber with digits only
                     if (phoneNumber.matches("\\d+")) {
                         // Validate access from comboBox
-                        String selectedAccess = accessComboBox.getSelectedItem().toString();
+                        String selectedAccess = accessBoxPro.getSelectedItem().toString();
                         if (selectedAccess.equals("User") || selectedAccess.equals("Admin")) {
                             // Update the values in the table
                             profileTableModel.setValueAt(name, selectedRow, 1);
@@ -399,7 +736,6 @@ public class menuForm extends JFrame {
                             profileTableModel.setValueAt(phoneNumber, selectedRow, 3);
                             profileTableModel.setValueAt(password, selectedRow, 4);
                             profileTableModel.setValueAt(selectedAccess, selectedRow, 5);
-
                             // Update the profile in ProfileManager
                             Profile profile = new Profile(profileId, name, address, phoneNumber, password, selectedAccess);
                             profileManager.updateProfile(profile);
@@ -422,7 +758,6 @@ public class menuForm extends JFrame {
         }
     }
 
-
     private void saveProfile() {
         DefaultTableModel profileTableModel = (DefaultTableModel) profileTable.getModel();
         int rowCount = profileTableModel.getRowCount();
@@ -438,13 +773,19 @@ public class menuForm extends JFrame {
                 String phoneNumber = profileTableModel.getValueAt(i, 3).toString();
                 String password = profileTableModel.getValueAt(i, 4).toString();
                 String access = profileTableModel.getValueAt(i, 5).toString();
-
                 Profile profile = new Profile(name, address, phoneNumber, password, access);
                 profileManager.addProfile(profile);
             }
         }
-    }
 
+        refreshProfileTable();
+        // Clear the fields
+        nameFieldProfile.setText("");
+        addressFieldProfile.setText("");
+        phoneNumberField.setText("");
+        passwordFieldProfile.setText("");
+        accessBoxPro.setSelectedIndex(0);
+    }
 
     private void initializeProfileTable() {
         DefaultTableModel profileTableModel = new DefaultTableModel();
@@ -457,9 +798,9 @@ public class menuForm extends JFrame {
 
         profileTable.setModel(profileTableModel);
 
-        accessComboBox = new JComboBox<>(new String[]{"User", "Admin"}); // Pindahkan inisialisasi ke sini
         TableColumn accessColumn = profileTable.getColumnModel().getColumn(5);
-        accessColumn.setCellEditor(new DefaultCellEditor(accessComboBox));
+        JComboBox<String> accessBoxPro = new JComboBox<>(new String[]{"User", "Admin"});
+        accessColumn.setCellEditor(new DefaultCellEditor(accessBoxPro));
 
         refreshProfileTable();
     }
@@ -470,9 +811,9 @@ public class menuForm extends JFrame {
         profileTableModel.setRowCount(0);
 
         List<Profile> profiles = profileManager.getAllProfiles();
-
         for (Profile profile : profiles) {
             profileTableModel.addRow(new Object[]{profile.getId(), profile.getName(), profile.getAddress(), profile.getPhoneNumber(), profile.getPassword(), profile.getAccess()});
         }
     }
 }
+

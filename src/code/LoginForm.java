@@ -5,13 +5,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import Connection.connectionLaundry;
+import Connection.ConnectionLaundry;
 
 
 /**
  *
  */
-public class loginForm extends JFrame {
+public class LoginForm extends JFrame {
     private JPanel panels;
     private JLabel loginBanner;
     private JTextField usernameFields;
@@ -30,11 +30,14 @@ public class loginForm extends JFrame {
     private JLabel authImage;
     /**
      * The login form class for user authentication.
+     * 100% code my me, Hafizh Vito Pratomo none help.
      */
-    private connectionLaundry connectionLaundry;
+    private ConnectionLaundry connectionLaundry;
+    private String userType;
+    private String username;
 
-    public loginForm() {
-        connectionLaundry = new connectionLaundry();
+    public LoginForm() {
+        connectionLaundry = new ConnectionLaundry();
 
         setTitle("Login");
         setContentPane(panels);
@@ -48,12 +51,17 @@ public class loginForm extends JFrame {
 
         chooseLabel.addItem("User");
         chooseLabel.addItem("Admin");
-
+        /**
+         * Handles the action when the sign-in button is clicked.
+         * Gets the input values and checks the login credentials.
+         * If the login is successful, displays a success message and opens the main menu form.
+         * If the login fails, displays an error message.
+         */
         signInButton.addActionListener(new ActionListener() {
             // Get the input values
             @Override
             public void actionPerformed(ActionEvent e) {
-                String username = usernameField.getText();
+                String username = usernameField.getText(); // Menggunakan usernameField.getText() untuk mengambil nilai username
                 String password = new String(passwordField.getPassword());
                 String userType = chooseLabel.getSelectedItem().toString();
                 // Check login credentials
@@ -62,7 +70,7 @@ public class loginForm extends JFrame {
                 if (loggedIn) {
                     JOptionPane.showMessageDialog(panels, "Login successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
                     // Open the main menu form
-                    menuForm menuForm = new menuForm();
+                    MenuForm menuForm = new MenuForm();
                     menuForm.setVisible(true);
                     setVisible(false);
                 } else {
@@ -70,12 +78,15 @@ public class loginForm extends JFrame {
                 }
             }
         });
-
+        /**
+         * Handles the action when the back button is clicked.
+         * Opens the registration form.
+         */
         backButton.addActionListener(new ActionListener() {
             // Open the registration form
             @Override
             public void actionPerformed(ActionEvent e) {
-                registrationForm registrationForms = new registrationForm();
+                RegistrationForm registrationForms = new RegistrationForm();
                 registrationForms.setVisible(true);
                 dispose();
             }
@@ -83,8 +94,7 @@ public class loginForm extends JFrame {
 
         setVisible(true);
     }
-
     public static void main(String[] args) {
-        loginForm form = new loginForm();
+        LoginForm form = new LoginForm();
     }
 }

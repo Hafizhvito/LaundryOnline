@@ -4,7 +4,7 @@ CREATE DATABASE IF NOT EXISTS laundry_db;
 -- Menggunakan database "laundry_db" --
 USE laundry_db;
 
--- Membuat tabel "users" untuk menyimpan data pengguna --
+-- Membuat tabel "users" untuk menyimpan data Profile --
 CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(50) NOT NULL,
@@ -14,11 +14,23 @@ CREATE TABLE IF NOT EXISTS users (
   userType ENUM('User', 'Admin') NOT NULL
 );
 
--- Membuat tabel "laundry_types" untuk menyimpan data jenis laundry --
+-- Membuat tabel "laundry_types" untuk menyimpan data LaundryType--
 CREATE TABLE IF NOT EXISTS laundry_types (
   id INT AUTO_INCREMENT PRIMARY KEY,
   laundry_type VARCHAR(100) NOT NULL,
-  price DECIMAL(10,0) NOT NULL
+  price VARCHAR (100) NOT NULL
+);
+
+-- Membuat tabel "orders" untuk menyimpan data Order --
+CREATE TABLE IF NOT EXISTS orders (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  customer VARCHAR(50) NOT NULL,
+  laundry_type VARCHAR(100) NOT NULL,
+  weight VARCHAR(100) NOT NULL,
+  total_price VARCHAR(100) NOT NULL,
+  payment VARCHAR (100) NOT NULL,
+  remaining_balance VARCHAR(100) NOT NULL,
+  status VARCHAR(50) NOT NULL
 );
 
 -- Memasukkan data pengguna ke dalam tabel "users" --
@@ -40,4 +52,5 @@ VALUES
   ('Shirt Laundry', 15000),
   ('Suit Cleaning', 15000),
   ('Uniform Wash', 20000),
+  ('Rener', 10000),
   ('Leather Care', 50000);

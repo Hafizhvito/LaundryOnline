@@ -1,7 +1,6 @@
 package code;
 
 import java.sql.*;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class LaundryTypeManager {
         try {
             PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, laundryType.getLaundryType());
-            statement.setDouble(2, laundryType.getPrice());
+            statement.setString(2, laundryType.getPrice());
             statement.executeUpdate();
 
             ResultSet generatedKeys = statement.getGeneratedKeys();
@@ -40,6 +39,7 @@ public class LaundryTypeManager {
         }
     }
 
+
     public List<LaundryType> getAllLaundryTypes() {
         List<LaundryType> laundryTypes = new ArrayList<>();
         String query = "SELECT * FROM laundry_types";
@@ -48,8 +48,8 @@ public class LaundryTypeManager {
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String laundryType = resultSet.getString("laundry_type");
-                double price = resultSet.getDouble("price");
-                LaundryType lt = new LaundryType(id, laundryType, price);
+                double price = Double.parseDouble(resultSet.getString("price"));
+                LaundryType lt = new LaundryType(id, laundryType, String.valueOf(price));
                 laundryTypes.add(lt);
             }
         } catch (SQLException e) {
@@ -66,8 +66,8 @@ public class LaundryTypeManager {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 String laundryType = resultSet.getString("laundry_type");
-                double price = resultSet.getDouble("price");
-                return new LaundryType(id, laundryType, price);
+                double price = Double.parseDouble(resultSet.getString("price"));
+                return new LaundryType(id, laundryType, String.valueOf(price));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -78,12 +78,11 @@ public class LaundryTypeManager {
         String query = "UPDATE laundry_types SET laundry_type = ?, price = ? WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, laundryType.getLaundryType());
-            statement.setDouble(2, laundryType.getPrice());
+            statement.setString(2, laundryType.getPrice());
             statement.setInt(3, laundryType.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
-}
+ }
