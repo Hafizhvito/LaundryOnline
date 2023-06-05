@@ -286,7 +286,7 @@ public class MenuForm extends JFrame {
         });
     }
 
-    // untuk halaman order
+    // Fungsi untuk halaman Order
     private void addOrderButton() {
         String customer = customerField.getText();
         String weight = weightOrderField.getText();
@@ -520,7 +520,7 @@ public class MenuForm extends JFrame {
         return 0;
     }
 
-    // Untuk halaman LaundryType
+    // Fungsi Untuk halaman LaundryType
     private void addLaundryType() {
         String laundryType = laundryTypeField.getText();
         String priceString = laundryPriceField.getText();
@@ -644,7 +644,8 @@ public class MenuForm extends JFrame {
         }
     }
 
-    // Untuk halaman Profile
+    // Fungsi untuk halaman Profile
+
     private void addProfile() {
         String name = nameFieldProfile.getText();
         String address = addressFieldProfile.getText();
