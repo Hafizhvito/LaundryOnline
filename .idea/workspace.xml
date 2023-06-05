@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="26d0c2c0-7824-4944-b4da-6dcca1db1139" name="Changes" comment="I have added several components as enhancements, built the database, and updated the code to improve its performance and eliminate any errors. Additionally, I have made improvements to the GUI's appearance.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/code/MenuForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/MenuForm.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
