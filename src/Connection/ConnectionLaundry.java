@@ -1,10 +1,10 @@
 package Connection;
 import java.sql.*;
 
-public class connectionLaundry {
+public class ConnectionLaundry {
     private Connection connection;
 
-    public connectionLaundry() {
+    public ConnectionLaundry() {
         // Mendapatkan koneksi ke database
         String url = "jdbc:mysql://localhost:3306/laundry_db";
 

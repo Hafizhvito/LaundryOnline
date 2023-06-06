@@ -21,6 +21,18 @@ CREATE TABLE IF NOT EXISTS laundry_types (
   price DECIMAL(10,0) NOT NULL
 );
 
+-- Membuat tabel "orders" untuk menyimpan data Order --
+CREATE TABLE IF NOT EXISTS orders (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  customer VARCHAR(50) NOT NULL,
+  laundry_type VARCHAR(100) NOT NULL,
+  weight VARCHAR(100) NOT NULL,
+  total_price VARCHAR(100) NOT NULL,
+  payment VARCHAR (100) NOT NULL,
+  remaining_balance VARCHAR(100) NOT NULL,
+  status VARCHAR(50) NOT NULL
+);
+
 -- Memasukkan data pengguna ke dalam tabel "users" --
 INSERT INTO users (username, password, address, telepon, userType)
 VALUES ('Yanto', '12345678', 'Cikampek', '0987654321', 'User'),
@@ -41,3 +53,14 @@ VALUES
   ('Suit Cleaning', 15000),
   ('Uniform Wash', 20000),
   ('Leather Care', 50000);
+
+-- Memasukkan data order ke dalam tabel "orders" --
+INSERT INTO orders (customer, laundry_type, weight, total_price, payment, remaining_balance, status)
+VALUES ('Yanto', 'Regular Wash', '2', '20000', '20000', '0', 'Settled'),
+       ('Budi', 'Dry Cleaning', '3', '45000', '45000', '0', 'Settled'),
+       ('Naruto', 'Delicate Wash', '1', '12000', '10000', '2000', 'Unpaid'),
+       ('Dodi', 'Ironing Service', '2', '10000', '8000', '2000', 'Unpaid');
+
+
+
+

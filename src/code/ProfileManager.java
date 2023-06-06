@@ -1,10 +1,7 @@
 package code;
 
-import code.Profile;
-
 import java.sql.*;
 import java.util.ArrayList;
-
 import java.util.List;
 
 public class ProfileManager {
@@ -30,6 +27,7 @@ public class ProfileManager {
                 int generatedId = generatedKeys.getInt(1);
                 profile.setId(generatedId);
             }
+            statement.close(); // Close the statement after use
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -46,6 +44,7 @@ public class ProfileManager {
             statement.setString(5, profile.getAccess());
             statement.setInt(6, profile.getId());
             statement.executeUpdate();
+            statement.close(); // Close the statement after use
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -53,19 +52,64 @@ public class ProfileManager {
 
     public void deleteProfile(int profileId) {
         try {
-            if (profileId != 0) {
-                String sql = "DELETE FROM users WHERE id = ?";
-                PreparedStatement statement = connection.prepareStatement(sql);
-                statement.setInt(1, profileId);
-                statement.executeUpdate();
-            } else {
-                System.out.println("Profile ID is not available");
-            }
+            String sql = "DELETE FROM users WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, profileId);
+            statement.executeUpdate();
+            statement.close(); // Close the statement after use
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    public int getTotalData() {
+        String sql = "SELECT COUNT(*) FROM users";
+        int totalData = 0;
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            if (resultSet.next()) {
+                totalData = resultSet.getInt(1);
+            }
+            resultSet.close();
+            statement.close(); // Close the statement after use
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalData;
+    }
+// kode ini hanya untuk opsional
+
+    public Object[][] selectProfile() {
+        Object[][] data = null;
+        try {
+            String sql = "SELECT * FROM users";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            int totalData = getTotalData();
+            data = new Object[totalData][6];
+
+            int angka = 0;
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("username");
+                String password = resultSet.getString("password");
+                String address = resultSet.getString("address");
+                String phoneNumber = resultSet.getString("telepon");
+                String access = resultSet.getString("userType");
+                data[angka] = new Object[]{id, name, password, address, phoneNumber, access};
+                angka++;
+            }
+
+            resultSet.close();
+            statement.close(); // Close the statement after use
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
 
     public List<Profile> getAllProfiles() {
         List<Profile> profiles = new ArrayList<>();
@@ -84,13 +128,15 @@ public class ProfileManager {
                 profiles.add(profile);
             }
             resultSet.close();
-            statement.close();
+            statement.close(); // Close the statement after use
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return profiles;
     }
+
     public Profile getProfileById(int profileId) {
+        Profile profile = null;
         try {
             String sql = "SELECT * FROM users WHERE id = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -103,29 +149,15 @@ public class ProfileManager {
                 String address = resultSet.getString("address");
                 String phoneNumber = resultSet.getString("telepon");
                 String access = resultSet.getString("userType");
-                Profile profile = new Profile(profileId, name, address, phoneNumber, password, access);
-                resultSet.close();
-                statement.close();
-                return profile;
+                profile = new Profile(profileId, name, address, phoneNumber, password, access);
             }
+
+            resultSet.close();
+            statement.close(); // Close the statement after use
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return null; // Mengembalikan null jika profil tidak ditemukan
+        return profile;
     }
-    public void updateLaundryType(LaundryType laundryType) {
-        String query = "UPDATE laundry_types SET laundry_type = ?, price = ? WHERE id = ?";
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, laundryType.getLaundryType());
-            statement.setDouble(2, laundryType.getPrice());
-            statement.setInt(3, laundryType.getId());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-
 }
