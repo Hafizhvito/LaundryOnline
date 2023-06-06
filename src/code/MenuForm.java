@@ -1,6 +1,8 @@
 package code;
 
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -276,6 +278,7 @@ public class MenuForm extends JFrame {
         });
 
         setVisible(true);
+<<<<<<< HEAD
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -287,6 +290,19 @@ public class MenuForm extends JFrame {
     }
 
     // Fungsi untuk halaman Order
+=======
+//        button1.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                LoginForm loginForm = new LoginForm();
+//                loginForm.setVisible(true);
+//                setVisible(false);
+//            }
+//        });
+    }
+
+    // untuk halaman order
+>>>>>>> main
     private void addOrderButton() {
         String customer = customerField.getText();
         String weight = weightOrderField.getText();
@@ -485,8 +501,25 @@ public class MenuForm extends JFrame {
             };
             orderTableModel.addRow(rowData);
         }
+<<<<<<< HEAD
     }
 
+=======
+
+        // Mendapatkan semua tipe Laundry dari laundryTypeManager
+        List<LaundryType> laundryTypes = laundryTypeManager.getAllLaundryTypes();
+
+        // Menghapus semua item pada BoxLaundryType
+        boxLaundryType.removeAllItems();
+
+        // Menambahkan tipe Laundry ke BoxLaundryType
+        for (LaundryType laundryType : laundryTypes) {
+            boxLaundryType.addItem(laundryType.getLaundryType() + " - " + laundryType.getPrice());
+        }
+    }
+
+
+>>>>>>> main
     private void calculateTotalAndRemainingBalance() {
         String weight = weightOrderField.getText();
         String payment = paymentField.getText();
@@ -520,7 +553,11 @@ public class MenuForm extends JFrame {
         return 0;
     }
 
+<<<<<<< HEAD
     // Fungsi Untuk halaman LaundryType
+=======
+    // Untuk halaman LaundryType
+>>>>>>> main
     private void addLaundryType() {
         String laundryType = laundryTypeField.getText();
         String priceString = laundryPriceField.getText();
@@ -644,8 +681,12 @@ public class MenuForm extends JFrame {
         }
     }
 
+<<<<<<< HEAD
     // Fungsi untuk halaman Profile
 
+=======
+    // Untuk halaman Profile
+>>>>>>> main
     private void addProfile() {
         String name = nameFieldProfile.getText();
         String address = addressFieldProfile.getText();
@@ -800,11 +841,31 @@ public class MenuForm extends JFrame {
         profileTable.setModel(profileTableModel);
 
         TableColumn accessColumn = profileTable.getColumnModel().getColumn(5);
+<<<<<<< HEAD
         JComboBox<String> accessBoxPro = new JComboBox<>(new String[]{"User", "Admin"});
         accessColumn.setCellEditor(new DefaultCellEditor(accessBoxPro));
+=======
+        accessBoxPro = new JComboBox<>(new String[]{"User", "Admin"}); // Declare accessBoxPro at the class level
+        accessColumn.setCellEditor(new DefaultCellEditor(accessBoxPro));
+
+        // Add a TableModelListener to detect changes in the table
+        profileTableModel.addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                int row = e.getFirstRow();
+                int column = e.getColumn();
+
+                if (column == 5) {
+                    String selectedAccess = profileTableModel.getValueAt(row, column).toString();
+                    accessBoxPro.setSelectedItem(selectedAccess);
+                }
+            }
+        });
+>>>>>>> main
 
         refreshProfileTable();
     }
+
 
 
     private void refreshProfileTable() {
@@ -816,5 +877,9 @@ public class MenuForm extends JFrame {
             profileTableModel.addRow(new Object[]{profile.getId(), profile.getName(), profile.getAddress(), profile.getPhoneNumber(), profile.getPassword(), profile.getAccess()});
         }
     }
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> main

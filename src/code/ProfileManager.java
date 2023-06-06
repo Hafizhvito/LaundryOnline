@@ -160,5 +160,9 @@ public class ProfileManager {
 
         return profile;
     }
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> main

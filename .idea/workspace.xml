@@ -6,6 +6,23 @@
   <component name="ChangeListManager">
     <list default="true" id="26d0c2c0-7824-4944-b4da-6dcca1db1139" name="Changes" comment="I have added several components as enhancements, built the database, and updated the code to improve its performance and eliminate any errors. Additionally, I have made improvements to the GUI's appearance.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/src/Connection/connectionLaundry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Connection/ConnectionLaundry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/RegistrationForm.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/RegistrationForm.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/loginForm.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/LoginForm.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/menuForm.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/MenuForm.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Sql/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/Sql/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/code/LaundryType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/LaundryType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/code/LaundryTypeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/LaundryTypeManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/code/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/code/OrderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/OrderManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/code/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/Profile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/code/ProfileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/ProfileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/code/loginForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/LoginForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/code/menuForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/MenuForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/code/registrationForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/RegistrationForm.java" afterDir="false" />
+>>>>>>> main
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +63,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< HEAD
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
@@ -63,8 +81,26 @@
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+=======
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "true",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "146",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "true",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "384",
+    "git-widget-placeholder": "63205ed3",
+    "last_opened_file_path": "C:/Users/Vito/IdeaProjects/LaundryOnline",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+>>>>>>> main
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Vito\IdeaProjects\Project Laundry\src\image" />

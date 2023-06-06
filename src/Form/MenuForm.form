@@ -584,7 +584,11 @@
             </properties>
             <border type="none"/>
             <children>
+<<<<<<< HEAD
               <grid id="a752b" binding="botPanelOrder" layout-manager="GridLayoutManager" row-count="6" column-count="10" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+=======
+              <grid id="a752b" binding="botPanelOrder" layout-manager="GridLayoutManager" row-count="7" column-count="9" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+>>>>>>> main
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints border-constraint="South"/>
                 <properties>
@@ -595,7 +599,11 @@
                 <children>
                   <component id="5dd40" class="javax.swing.JLabel" binding="textOrder">
                     <constraints>
+<<<<<<< HEAD
                       <grid row="0" column="0" row-span="1" col-span="10" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+=======
+                      <grid row="0" column="0" row-span="1" col-span="9" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+>>>>>>> main
                     </constraints>
                     <properties>
                       <font name="Century" size="26"/>
@@ -614,6 +622,7 @@
                   </component>
                   <component id="8f643" class="javax.swing.JTextField" binding="idOrderField">
                     <constraints>
+<<<<<<< HEAD
                       <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="-1" height="27"/>
                         <maximum-size width="-1" height="200"/>
@@ -630,10 +639,16 @@
                       <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="-1" height="27"/>
                         <maximum-size width="-1" height="200"/>
+=======
+                      <grid row="1" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="27"/>
+                        <maximum-size width="-1" height="100"/>
+>>>>>>> main
                       </grid>
                     </constraints>
                     <properties/>
                   </component>
+<<<<<<< HEAD
                   <component id="9311e" class="javax.swing.JLabel" binding="customerOrder">
                     <constraints>
                       <grid row="2" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -708,6 +723,8 @@
                       <text value="Add"/>
                     </properties>
                   </component>
+=======
+>>>>>>> main
                   <component id="ff1f2" class="javax.swing.JLabel" binding="totalOrder">
                     <constraints>
                       <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -717,6 +734,27 @@
                       <text value="Total"/>
                     </properties>
                   </component>
+<<<<<<< HEAD
+=======
+                  <component id="54b09" class="javax.swing.JTextField" binding="totalField">
+                    <constraints>
+                      <grid row="1" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="27"/>
+                        <maximum-size width="-1" height="100"/>
+                      </grid>
+                    </constraints>
+                    <properties/>
+                  </component>
+                  <component id="bfbf4" class="javax.swing.JTextField" binding="paymentField">
+                    <constraints>
+                      <grid row="2" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="27"/>
+                        <maximum-size width="-1" height="100"/>
+                      </grid>
+                    </constraints>
+                    <properties/>
+                  </component>
+>>>>>>> main
                   <component id="58fad" class="javax.swing.JLabel" binding="paydepoOrder">
                     <constraints>
                       <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -726,6 +764,36 @@
                       <text value="Pay/Depo"/>
                     </properties>
                   </component>
+<<<<<<< HEAD
+=======
+                  <component id="a375a" class="javax.swing.JTextField" binding="customerField">
+                    <constraints>
+                      <grid row="2" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="27"/>
+                        <maximum-size width="-1" height="100"/>
+                      </grid>
+                    </constraints>
+                    <properties/>
+                  </component>
+                  <component id="9311e" class="javax.swing.JLabel" binding="customerOrder">
+                    <constraints>
+                      <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <foreground color="-16335178"/>
+                      <text value="Costumer"/>
+                    </properties>
+                  </component>
+                  <component id="82722" class="javax.swing.JTextField" binding="remainingBalanceField">
+                    <constraints>
+                      <grid row="3" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="27"/>
+                        <maximum-size width="-1" height="100"/>
+                      </grid>
+                    </constraints>
+                    <properties/>
+                  </component>
+>>>>>>> main
                   <component id="c89ff" class="javax.swing.JLabel" binding="remainingBalance">
                     <constraints>
                       <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -735,6 +803,45 @@
                       <text value="Remaining Balance"/>
                     </properties>
                   </component>
+<<<<<<< HEAD
+=======
+                  <component id="63d7d" class="javax.swing.JComboBox" binding="boxLaundryType">
+                    <constraints>
+                      <grid row="3" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="-1" height="27"/>
+                        <maximum-size width="-1" height="1000"/>
+                      </grid>
+                    </constraints>
+                    <properties/>
+                  </component>
+                  <component id="f7d37" class="javax.swing.JLabel" binding="laundryTypeOrder">
+                    <constraints>
+                      <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <foreground color="-16335178"/>
+                      <text value="Laundry Type"/>
+                    </properties>
+                  </component>
+                  <component id="2df5b" class="javax.swing.JTextField" binding="statusField">
+                    <constraints>
+                      <grid row="4" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="27"/>
+                        <maximum-size width="-1" height="100"/>
+                      </grid>
+                    </constraints>
+                    <properties/>
+                  </component>
+                  <component id="12768" class="javax.swing.JLabel" binding="weightOrder">
+                    <constraints>
+                      <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <foreground color="-16335178"/>
+                      <text value="Weight"/>
+                    </properties>
+                  </component>
+>>>>>>> main
                   <component id="5b813" class="javax.swing.JLabel" binding="statusOrder">
                     <constraints>
                       <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -744,6 +851,7 @@
                       <text value="Status"/>
                     </properties>
                   </component>
+<<<<<<< HEAD
                   <component id="656a7" class="javax.swing.JButton" binding="refreshOrderButton">
                     <constraints>
                       <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -811,11 +919,42 @@
                       <focusable value="false"/>
                       <foreground color="-1"/>
                       <text value="Change"/>
+=======
+                  <hspacer id="4e190">
+                    <constraints>
+                      <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                  </hspacer>
+                  <component id="4cc05" class="javax.swing.JTextField" binding="weightOrderField">
+                    <constraints>
+                      <grid row="4" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="27"/>
+                        <maximum-size width="-1" height="100"/>
+                      </grid>
+                    </constraints>
+                    <properties/>
+                  </component>
+                  <component id="bd336" class="javax.swing.JButton" binding="refreshOrderButton">
+                    <constraints>
+                      <grid row="6" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Refresh"/>
+>>>>>>> main
                     </properties>
                   </component>
+                  <hspacer id="71e88">
+                    <constraints>
+                      <grid row="5" column="8" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                  </hspacer>
                   <component id="b5dd7" class="javax.swing.JButton" binding="saveOrderButtton">
                     <constraints>
+<<<<<<< HEAD
                       <grid row="5" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+=======
+                      <grid row="6" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="1" use-parent-layout="false"/>
+>>>>>>> main
                     </constraints>
                     <properties>
                       <background color="-4744705"/>
@@ -824,11 +963,39 @@
                       <text value="Save"/>
                     </properties>
                   </component>
+<<<<<<< HEAD
                   <hspacer id="19dce">
                     <constraints>
                       <grid row="1" column="8" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                   </hspacer>
+=======
+                  <component id="68ecf" class="javax.swing.JButton" binding="addOrderButton">
+                    <constraints>
+                      <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <foreground color="-16335178"/>
+                      <text value="Add"/>
+                    </properties>
+                  </component>
+                  <component id="af846" class="javax.swing.JButton" binding="deleteOrderButton">
+                    <constraints>
+                      <grid row="6" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Delete"/>
+                    </properties>
+                  </component>
+                  <component id="d98db" class="javax.swing.JButton" binding="changeOrderButton">
+                    <constraints>
+                      <grid row="6" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Change"/>
+                    </properties>
+                  </component>
+>>>>>>> main
                 </children>
               </grid>
               <grid id="76cd8" binding="orderTablePanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">

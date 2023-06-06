@@ -85,4 +85,8 @@ public class LaundryTypeManager {
             e.printStackTrace();
         }
     }
+<<<<<<< HEAD
  }
+=======
+}
+>>>>>>> main
